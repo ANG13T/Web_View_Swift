@@ -28,11 +28,15 @@ class ViewController: UIViewController, WKNavigationDelegate {
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil) //adds spacing
         let refreshButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: webView, action: #selector(webView.reload)) //refreshes webview
         
+        let backButton = UIBarButtonItem(barButtonSystemItem: .undo, target: webView, action: #selector(webView.goBack)) //back button
+        
+        let forwardButton = UIBarButtonItem(barButtonSystemItem: .redo, target: webView, action: #selector(webView.goForward))
+        
         progressView = UIProgressView(progressViewStyle: .default)
         progressView.sizeToFit()
         let progressButton = UIBarButtonItem(customView: progressView)
         
-        toolbarItems = [progressButton, spacer, refreshButton] //adds these items to toolbar
+        toolbarItems = [backButton, forwardButton, progressButton, spacer, refreshButton] //adds these items to toolbar
         navigationController?.isToolbarHidden = false //enables toolbar to be seen
         
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil) //observing the progress value (looking at how much the webview is done loading)
