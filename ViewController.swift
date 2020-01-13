@@ -12,7 +12,9 @@ import WebKit
 class ViewController: UIViewController, WKNavigationDelegate {
     var webView: WKWebView!
     var progressView: UIProgressView!
-    var websites = ["google.com", "facebook.com"]
+    
+    var websites = [String?]()
+    var initialIndex: Int!
     
     override func loadView() {
         webView = WKWebView()
@@ -23,7 +25,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        let url = URL(string: "https://www." + websites[0])!
+        let url = URL(string: "https://www." + websites[initialIndex]!)!
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Open", style: .plain, target: self, action: #selector(openTapped))
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil) //adds spacing
         let refreshButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: webView, action: #selector(webView.reload)) //refreshes webview
@@ -81,7 +83,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
         
         if let host = url?.host { //if there is an domain for this url then pull it out
             for website in websites{ //loops through websites array and checks if domain contains that URL
-                if host.contains(website){
+                if host.contains(website!){
                     decisionHandler(.allow) //allow loading
                     return
                 }
