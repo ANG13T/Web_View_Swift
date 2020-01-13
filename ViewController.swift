@@ -84,6 +84,9 @@ class ViewController: UIViewController, WKNavigationDelegate {
             }
         }
         decisionHandler(.cancel) //cancel loading
+        let ac = UIAlertController(title: "Invalid Link!", message: nil, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(ac, animated:true)
     }
 }
 
