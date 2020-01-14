@@ -35,4 +35,25 @@ class LinkViewController: UITableViewController {
             navigationController?.pushViewController(wvc, animated: true)
         }
     }
+    
+    
+    @IBAction func addLinkPressed(_ sender: Any) {
+        var textField = UITextField()
+               let ac = UIAlertController(title: "Add a Link", message: nil, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Add Link", style: .default) { (action) in
+            if(textField.text != nil){
+                print("Created Link!")
+                self.websites.append(textField.text!)
+                self.tableView.reloadData()
+            }
+            })
+               ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+               ac.addTextField { (alertTextField) in
+                    alertTextField.placeholder = "Create new link"
+                    textField = alertTextField
+                }
+               present(ac, animated: true)
+    }
+    
+ 
 }

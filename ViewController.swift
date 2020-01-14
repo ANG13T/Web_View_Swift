@@ -78,21 +78,5 @@ class ViewController: UIViewController, WKNavigationDelegate {
         }
     }
     
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        let url = navigationAction.request.url
-        
-        if let host = url?.host { //if there is an domain for this url then pull it out
-            for website in websites{ //loops through websites array and checks if domain contains that URL
-                if host.contains(website!){
-                    decisionHandler(.allow) //allow loading
-                    return
-                }
-            }
-        }
-        decisionHandler(.cancel) //cancel loading
-        let ac = UIAlertController(title: "Invalid Link!", message: nil, preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        present(ac, animated:true)
-    }
 }
 
